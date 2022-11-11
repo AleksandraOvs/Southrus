@@ -1,0 +1,83 @@
+<?php
+
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
+
+Container::make('post_meta', 'Карточка собаки')
+    ->show_on_post_type('dogs')
+    ->add_fields( array(
+        Field::make('text', 'photo_autor', 'Автор фото'), 
+        Field::make('text', 'dog_id', 'ID'),
+        Field::make('text', 'dog_name', 'Кличка'),
+            //->add_class('darker-card'),
+        Field::make('radio', 'dog_sex', "Пол")
+            ->add_options( array(
+                 'Сука' => 'Сука',
+                 'Кобель' => 'Кобель',
+            )),
+            
+        //Field::make('image', 'dog_photo', 'Фотография'),    
+        Field::make('text', 'dog_genealogy', 'Родословная №'),
+        Field::make('text', 'dog_mark', 'Клеймо/чип'),
+        Field::make('text', 'dog_birthday', 'Дата рождения'),
+        Field::make('text', 'dog_death', 'Дата смерти'),
+        Field::make('text', 'dog_color', 'Окрас'),
+        Field::make('text', 'dog_health', 'Проверка здоровья'),
+        Field::make('text', 'dog_breeder', 'Заводчик'),
+        Field::make('text', 'dog_breeders_kennel', 'Питомник заводчика'),
+        Field::make('text', 'dog_owner', 'Владелец'),
+        Field::make('text', 'dog_owners_kennel', 'Питомник владельца'),
+        Field::make('text', 'dog_location', 'Локация'),
+
+        Field::make('text', 'dog_survey', 'Промеры'),
+        Field::make('text', 'dog_training', 'Дрессировка/тесты'),
+        Field::make('text', 'dog_score_titles', 'Оценка и титулы'),
+        Field::make('text', 'dog_sert', 'Сертификаты'),
+        Field::make('text', 'dog_app', 'Бонитировка'),
+            ));
+
+Container::make('post_meta', 'Родители')
+    ->show_on_post_type('dogs')
+    ->add_fields( array(
+        Field::make('association', 'crb_association_parents', 'Карточки родителей')
+            ->set_max(2)
+            ->set_types( array(
+            array(
+                'type' => 'post',
+                'post_type' => 'dogs'
+               ),
+            )),  
+));
+
+Container::make('post_meta', 'Контент для страницы История породы')
+    ->show_on_page('about-breed')
+    ->add_fields( array(
+        Field::make('complex', 'crb_about_breed_links', 'Ссылки в разделе О породе')
+            ->add_fields('about_breed_links', 'Ссылки', array (
+                Field::make('text', 'about_breed_link_description', 'Описание к ссылке'),
+                Field::make('text', 'about_breed_link', 'Ссылка'),
+                Field::make('text', 'about_breed_link_text', 'Заголовок ссылки'),
+            ))
+));
+
+Container::make('post_meta', 'Выставка')
+    ->add_tab(__('Сведения о выставке'), array(
+                Field::make('date','crb_expo_date', 'Дата выставки')
+                    ->set_width(25),
+                // Field::make('text', 'crb_expo_name', 'Название выставки')
+                //      ->set_width(25),
+                Field::make('text','crb_expo_city', 'Город выставки')
+                    ->set_width(25),
+                Field::make('text','crb_expo_country', 'Страна проведения')
+                    ->set_width(25),
+                Field::make('select', 'crb_expo_status', 'Статус выставки')
+                    ->add_options( array (
+                        'международная' => 'международная',
+                        'национальная' => 'национальная',
+                        'всероссийская' => 'всероссийская',
+                        'региональная' => 'региональная'
+                    ))
+                    ->set_width(25),
+                Field::make('text','crb_expo_expert', 'Судья выставки')
+                    ->set_width(25),      
+            ));
