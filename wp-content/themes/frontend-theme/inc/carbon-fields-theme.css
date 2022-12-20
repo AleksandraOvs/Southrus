@@ -1,0 +1,13 @@
+.cf-container .cf-field {
+    padding: 5px 12px !important;
+}
+
+
+.cf-container .cf-field+.cf-field {
+    /* border-top-width: 1px; */
+    display: flex;
+  }
+
+  .cf-field.cf-association.cf-field--has-width {
+    flex-direction: column;
+}

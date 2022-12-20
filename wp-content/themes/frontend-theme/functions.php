@@ -25,6 +25,7 @@ add_theme_support( 'custom-logo', [
 /* THUMBNAILS FOR POSTS*/
 add_theme_support( 'post-thumbnails', array( 'post','dogs' ) );
 add_image_size ('bigpic', 550, 400, true);
+add_image_size ('mediumpic', 200, 120, true);
 add_image_size ('smallpic', 88, 69, true);
 add_image_size ('dogpic', 200, 200, true);
 //add_image_size (название, ширина, высота, обрезка);
@@ -76,7 +77,10 @@ function ft_scripts(){
     wp_enqueue_script ('bootstrp-js', get_stylesheet_directory_uri() . '/assets/js/bootstrap.min.js');
 	wp_enqueue_script('swiper-scripts', 'https://unpkg.com/swiper/swiper-bundle.min.js');
     wp_enqueue_script ('scripts', get_stylesheet_directory_uri() . '/assets/js/scripts.js');
-	
+}
+add_action( 'admin_enqueue_scripts', 'crb_enqueue_custom_carbon_fields_styles' );
+function crb_enqueue_custom_carbon_fields_styles() {
+	wp_enqueue_style( 'carbon-fields-custom-theme', get_stylesheet_directory_uri() . '/inc/carbon-fields-theme.css' );
 }
 
 /*walker*/
